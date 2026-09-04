@@ -1,3 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+@theme {
+  --color-cv-primary: #aa1a45;
+  --color-cv-primary-dark: #861437;
+  --color-cv-soft: #ffdce5;
+  --color-cv-text: #1f2023;
+  --color-cv-muted: #464a4f;
+  --color-cv-background: #ffffff;
+
+  --font-sans: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-cv-background);
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100dvh;
+    margin: 0;
+    background-color: var(--color-cv-soft);
+    color: var(--color-cv-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-cv-primary);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-cv-primary);
+    color: var(--color-cv-background);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
