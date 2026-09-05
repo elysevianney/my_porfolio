@@ -46,4 +46,20 @@ describe('Header', () => {
     expect(button.getAttribute('aria-expanded')).toBe('false');
     expect(fixture.nativeElement.querySelector('#mobile-navigation')).toBeNull();
   });
+
+  it('should close the mobile menu with Escape and restore focus', () => {
+    const fixture = TestBed.createComponent(Header);
+    fixture.detectChanges();
+    const button = fixture.nativeElement.querySelector(
+      'button[aria-controls="mobile-navigation"]',
+    ) as HTMLButtonElement;
+
+    button.click();
+    fixture.detectChanges();
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    fixture.detectChanges();
+
+    expect(button.getAttribute('aria-expanded')).toBe('false');
+    expect(document.activeElement).toBe(button);
+  });
 });

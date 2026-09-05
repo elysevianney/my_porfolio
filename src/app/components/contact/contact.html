@@ -83,7 +83,7 @@
               class="min-h-12 w-full rounded-xl border border-cv-primary/25 bg-white px-4 py-3 text-cv-text transition-colors placeholder:text-cv-muted/70 hover:border-cv-primary"
               placeholder="vous@exemple.fr"
               [attr.aria-invalid]="contactForm.controls.email.invalid && contactForm.controls.email.touched"
-              aria-describedby="email-error"
+              [attr.aria-describedby]="contactForm.controls.email.invalid && contactForm.controls.email.touched ? 'email-error' : null"
             />
             @if (contactForm.controls.email.invalid && contactForm.controls.email.touched) {
               <p id="email-error" class="mt-2 text-sm font-medium text-cv-primary-dark">Saisissez une adresse e-mail valide.</p>
@@ -96,11 +96,12 @@
               id="contact-subject"
               type="text"
               formControlName="subject"
+              autocomplete="off"
               maxlength="120"
               class="min-h-12 w-full rounded-xl border border-cv-primary/25 bg-white px-4 py-3 text-cv-text transition-colors placeholder:text-cv-muted/70 hover:border-cv-primary"
               placeholder="Objet de votre message"
               [attr.aria-invalid]="contactForm.controls.subject.invalid && contactForm.controls.subject.touched"
-              aria-describedby="subject-error"
+              [attr.aria-describedby]="contactForm.controls.subject.invalid && contactForm.controls.subject.touched ? 'subject-error' : null"
             />
             @if (contactForm.controls.subject.invalid && contactForm.controls.subject.touched) {
               <p id="subject-error" class="mt-2 text-sm font-medium text-cv-primary-dark">Le sujet doit contenir entre 3 et 120 caractères.</p>
@@ -117,7 +118,7 @@
               class="w-full resize-y rounded-xl border border-cv-primary/25 bg-white px-4 py-3 text-cv-text transition-colors placeholder:text-cv-muted/70 hover:border-cv-primary"
               placeholder="Écrivez votre message ici…"
               [attr.aria-invalid]="contactForm.controls.message.invalid && contactForm.controls.message.touched"
-              aria-describedby="message-error"
+              [attr.aria-describedby]="contactForm.controls.message.invalid && contactForm.controls.message.touched ? 'message-error' : null"
             ></textarea>
             @if (contactForm.controls.message.invalid && contactForm.controls.message.touched) {
               <p id="message-error" class="mt-2 text-sm font-medium text-cv-primary-dark">Le message doit contenir entre 10 et 3 000 caractères.</p>
