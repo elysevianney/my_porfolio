@@ -3,6 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 
 import { FORMSPREE_ENDPOINT } from '../../data/contact.config';
+import { SOCIAL_LINKS } from '../../data/social-links.data';
 import { Contact } from './contact';
 
 describe('Contact', () => {
@@ -14,6 +15,15 @@ describe('Contact', () => {
   });
 
   afterEach(() => TestBed.inject(HttpTestingController).verify());
+
+  it('should render one icon per contact method and one for the location', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('[data-contact-icon]').length).toBe(
+      SOCIAL_LINKS.length + 1,
+    );
+  });
 
   it('should not submit an invalid form', () => {
     const fixture = TestBed.createComponent(Contact);
