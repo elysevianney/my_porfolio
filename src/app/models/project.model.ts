@@ -6,5 +6,6 @@ export interface Project {
   readonly tools: readonly string[];
   readonly skills: readonly string[];
   readonly image?: string;
+  readonly imageAlt?: string;
   readonly featured?: boolean;
 }
