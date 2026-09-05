@@ -1,0 +1,30 @@
+<section id="skills" aria-labelledby="skills-title" class="py-20 sm:py-24">
+  <div class="mb-10 max-w-3xl">
+    <p class="font-semibold tracking-wide text-cv-primary uppercase">Mon savoir-faire</p>
+    <h2 id="skills-title" class="mt-2 text-3xl font-bold tracking-tight text-cv-text sm:text-4xl">
+      Compétences
+    </h2>
+    <p class="mt-4 text-base leading-7 text-cv-muted sm:text-lg">
+      Des technologies complémentaires pour concevoir des applications web et mobiles de bout en bout.
+    </p>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    @for (skillCategory of skillCategories; track skillCategory.category) {
+      <article class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-black/5 sm:p-7">
+        <div class="mb-5 flex items-center gap-3">
+          <span class="size-3 shrink-0 rounded-full bg-cv-primary" aria-hidden="true"></span>
+          <h3 class="text-xl font-bold text-cv-primary-dark">{{ skillCategory.category }}</h3>
+        </div>
+
+        <ul class="flex flex-wrap gap-2" [attr.aria-label]="'Compétences : ' + skillCategory.category">
+          @for (skill of skillCategory.items; track skill) {
+            <li class="rounded-xl border border-cv-primary/15 bg-cv-soft/60 px-3 py-2 text-sm font-medium text-cv-text">
+              {{ skill }}
+            </li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+</section>
