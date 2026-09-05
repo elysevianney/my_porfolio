@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
 
 import { NAVIGATION_ITEMS } from '../../data/navigation.data';
 
@@ -10,6 +10,7 @@ import { NAVIGATION_ITEMS } from '../../data/navigation.data';
 export class Header {
   protected readonly navigationItems = NAVIGATION_ITEMS;
   protected readonly isMenuOpen = signal(false);
+  private readonly menuButton = viewChild<ElementRef<HTMLButtonElement>>('menuButton');
 
   protected toggleMenu(): void {
     this.isMenuOpen.update((isOpen) => !isOpen);
@@ -21,6 +22,11 @@ export class Header {
 
   @HostListener('document:keydown.escape')
   protected closeMenuOnEscape(): void {
+    if (!this.isMenuOpen()) {
+      return;
+    }
+
     this.closeMenu();
+    this.menuButton()?.nativeElement.focus();
   }
 }
