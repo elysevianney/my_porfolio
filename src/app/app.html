@@ -1,12 +1,43 @@
-<main id="main-content" class="mx-auto flex min-h-screen max-w-7xl items-center px-6 py-16 sm:px-8 lg:px-12">
-  <section aria-labelledby="page-title" class="w-full rounded-3xl bg-white p-8 shadow-sm ring-1 ring-black/5 sm:p-12">
-    <p class="mb-4 font-semibold tracking-wide text-cv-primary uppercase">Portfolio</p>
-    <h1 id="page-title" class="max-w-3xl text-4xl font-bold tracking-tight text-cv-text sm:text-6xl">
-      Elysé Vianney Ahomagnon
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-8 text-cv-muted">
-      Analyste développeur logiciel — une présentation de mon parcours, de mes compétences et de mes projets arrive bientôt.
-    </p>
-    <div class="mt-8 h-2 w-24 rounded-full bg-cv-primary" aria-hidden="true"></div>
+<a
+  href="#main-content"
+  class="sr-only fixed top-4 left-4 z-[60] rounded-lg bg-cv-primary px-4 py-3 font-semibold text-white focus:not-sr-only"
+>
+  Aller au contenu principal
+</a>
+
+<app-header />
+
+<main id="main-content" class="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+  <section id="home" aria-labelledby="page-title" class="flex min-h-[calc(100vh-5rem)] items-center py-16">
+    <div class="w-full rounded-3xl bg-white p-8 shadow-sm ring-1 ring-black/5 sm:p-12">
+      <p class="mb-4 font-semibold tracking-wide text-cv-primary uppercase">Portfolio</p>
+      <h1 id="page-title" class="max-w-3xl text-4xl font-bold tracking-tight text-cv-text sm:text-6xl">
+        Elysé Vianney Ahomagnon
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-cv-muted">
+        Analyste développeur logiciel — une présentation de mon parcours, de mes compétences et de mes projets arrive bientôt.
+      </p>
+      <div class="mt-8 h-2 w-24 rounded-full bg-cv-primary" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section id="about" aria-labelledby="about-title" class="py-24">
+    <h2 id="about-title" class="rounded-2xl bg-white px-6 py-4 text-2xl font-bold text-cv-primary">À propos</h2>
+  </section>
+
+  <section id="experience" aria-labelledby="experience-title" class="py-24">
+    <h2 id="experience-title" class="rounded-2xl bg-white px-6 py-4 text-2xl font-bold text-cv-primary">Expériences</h2>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-title" class="py-24">
+    <h2 id="skills-title" class="rounded-2xl bg-white px-6 py-4 text-2xl font-bold text-cv-primary">Compétences</h2>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-title" class="py-24">
+    <h2 id="projects-title" class="rounded-2xl bg-white px-6 py-4 text-2xl font-bold text-cv-primary">Projets</h2>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title" class="py-24">
+    <h2 id="contact-title" class="rounded-2xl bg-white px-6 py-4 text-2xl font-bold text-cv-primary">Contact</h2>
   </section>
 </main>
