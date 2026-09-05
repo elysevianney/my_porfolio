@@ -61,4 +61,29 @@ describe('Contact', () => {
       'bien été envoyé',
     );
   });
+
+  it('should display an accessible error when sending fails', () => {
+    const fixture = TestBed.createComponent(Contact);
+    fixture.detectChanges();
+
+    const setValue = (selector: string, value: string): void => {
+      const field = fixture.nativeElement.querySelector(selector) as HTMLInputElement;
+      field.value = value;
+      field.dispatchEvent(new Event('input'));
+    };
+
+    setValue('#contact-email', 'visiteur@example.com');
+    setValue('#contact-subject', 'Demande de contact');
+    setValue('#contact-message', 'Ce message valide simule une indisponibilité du service.');
+    fixture.nativeElement.querySelector('form').dispatchEvent(new Event('submit'));
+
+    TestBed.inject(HttpTestingController)
+      .expectOne(FORMSPREE_ENDPOINT)
+      .flush({ error: 'Service unavailable' }, { status: 503, statusText: 'Unavailable' });
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('[role="alert"]')?.textContent).toContain(
+      'L’envoi a échoué',
+    );
+  });
 });
