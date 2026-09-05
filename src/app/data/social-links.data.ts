@@ -13,6 +13,12 @@ export const SOCIAL_LINKS: readonly SocialLink[] = [
     kind: 'github',
     external: true,
   },
+  {
+    label: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/elysé-vianney-ahomagnon-a4a98b228',
+    kind: 'linkedin',
+    external: true,
+  },
 ];
 
 export const LOCATION = 'Rennes, France';
