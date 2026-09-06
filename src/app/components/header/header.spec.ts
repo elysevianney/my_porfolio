@@ -20,6 +20,9 @@ describe('Header', () => {
 
     expect(links.length).toBe(NAVIGATION_ITEMS.length);
     expect(links[0].getAttribute('href')).toBe('#home');
+    expect(fixture.nativeElement.querySelector('header > div > a')?.textContent).toContain(
+      'VIANNEY',
+    );
   });
 
   it('should open and close the mobile menu', () => {
