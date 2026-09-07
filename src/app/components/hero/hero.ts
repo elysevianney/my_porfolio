@@ -5,7 +5,6 @@ import {
   DestroyRef,
   ElementRef,
   inject,
-  signal,
   viewChild,
 } from '@angular/core';
 
@@ -15,20 +14,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Hero {
-  protected readonly isPlaying = signal(false);
   private readonly video = viewChild<ElementRef<HTMLVideoElement>>('backgroundVideo');
   private readonly destroyRef = inject(DestroyRef);
-  private wantsPlayback = false;
-  private inView = true;
+  private playbackAllowed = false;
+  private inView = false;
 
   constructor() {
     afterNextRender(() => {
       const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const connection = (navigator as Navigator & { connection?: { saveData?: boolean } })
         .connection;
-      this.wantsPlayback = !motion.matches && !connection?.saveData;
+      this.playbackAllowed = !motion.matches && !connection?.saveData;
       const updatePreference = () => {
-        this.wantsPlayback = !motion.matches && !connection?.saveData;
+        this.playbackAllowed = !motion.matches && !connection?.saveData;
         this.updatePlayback();
       };
       const visibility = () => this.updatePlayback();
@@ -39,7 +37,11 @@ export class Hero {
               this.updatePlayback();
             })
           : undefined;
-      observer?.observe(this.video()!.nativeElement);
+      if (observer) {
+        observer.observe(this.video()!.nativeElement);
+      } else {
+        this.inView = true;
+      }
       motion.addEventListener('change', updatePreference);
       document.addEventListener('visibilitychange', visibility);
       this.updatePlayback();
@@ -51,18 +53,15 @@ export class Hero {
     });
   }
 
-  protected toggleVideo(): void {
-    this.wantsPlayback = !this.isPlaying();
-    this.updatePlayback();
-  }
-
   private updatePlayback(): void {
     const video = this.video()?.nativeElement;
     if (!video) return;
-    if (this.wantsPlayback && this.inView && !document.hidden) {
+    if (this.playbackAllowed && this.inView && !document.hidden) {
       if (!video.getAttribute('src')) video.src = '/videos/matiere-loop.mp4';
       video.muted = true;
-      void video.play()?.catch(() => this.isPlaying.set(false));
+      void video.play()?.catch(() => {
+        // Keep the poster if the browser blocks automatic playback.
+      });
     } else if (!video.paused) {
       video.pause();
     }

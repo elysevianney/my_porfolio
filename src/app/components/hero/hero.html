@@ -9,9 +9,6 @@
         preload="none"
         poster="/videos/matiere-poster.jpg"
         tabindex="-1"
-        (playing)="isPlaying.set(true)"
-        (pause)="isPlaying.set(false)"
-        (error)="isPlaying.set(false)"
       ></video>
     </div>
     <div class="hero-copy">
@@ -50,21 +47,10 @@
     <div class="sculpture-caption" aria-hidden="true">
       <span class="caption-line"></span> L’idée prend forme.
     </div>
-    <button
-      type="button"
-      class="motion-toggle"
-      [attr.aria-label]="
-        isPlaying() ? 'Mettre la vidéo d’arrière-plan en pause' : 'Lire la vidéo d’arrière-plan'
-      "
-      [attr.aria-pressed]="isPlaying()"
-      (click)="toggleVideo()"
-    >
-      <span aria-hidden="true">{{ isPlaying() ? 'Ⅱ' : '▷' }}</span>
-      {{ isPlaying() ? 'Mettre en pause' : 'Animer la matière' }}
-    </button>
   </div>
   <div class="hero-bottom shell">
-    <span>Une approche sensible. Une base technique solide.</span
-    ><a href="#about">Faire connaissance <span aria-hidden="true">↓</span></a>
+    <span class="hero-tagline-full">Une approche sensible. Une base technique solide.</span>
+    <span class="hero-tagline-short">Du sens. Du solide.</span>
+    <a href="#about">Faire connaissance <span aria-hidden="true">↓</span></a>
   </div>
 </section>

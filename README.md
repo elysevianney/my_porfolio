@@ -41,7 +41,7 @@ Aucune bibliothèque ni police distante n’a été ajoutée au site. Le formula
 
 La boucle H.264 de 12 secondes, 768 × 768 à 20 images/s, pèse environ 175 Ko. Son affiche JPEG pèse environ 24 Ko. Aucun moteur 3D n’est chargé chez le visiteur.
 
-La vidéo est muette, contrôlable et mise en pause lorsqu’elle sort de l’écran ou lorsque l’onglet est masqué. Elle ne se charge pas automatiquement si la réduction des mouvements ou l’économie de données est activée. L’affiche reste disponible et une lecture volontaire demeure possible.
+La vidéo est muette et tourne automatiquement en boucle tant qu’elle est visible, sans bouton de lecture/pause. Elle se met en pause hors écran ou lorsque l’onglet est masqué, puis reprend au retour. La réduction des mouvements et l’économie de données conservent l’affiche statique sans chargement automatique.
 
 Pour régénérer les ressources, disposer de FFmpeg et de Playwright avec un navigateur Chromium, puis lancer :
 

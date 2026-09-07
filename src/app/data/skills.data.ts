@@ -15,14 +15,18 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
   },
   {
     category: 'Données',
-    items: ['SQL', 'MySQL', 'MongoDB', 'NoSQL'],
+    items: ['SQL', 'MySQL', 'MongoDB', 'NoSQL', 'Postgres', 'Firebase'],
   },
   {
     category: 'Tests et conception',
-    items: ['JUnit', 'PHPUnit', 'Tests unitaires', 'UML'],
+    items: ['JUnit', 'PHPUnit', 'CI/CD'],
   },
   {
     category: 'Outils et méthodes',
-    items: ['Git', 'GitHub', 'GitLab', 'Docker', 'WordPress', 'Figma', 'Scrum'],
+    items: ['Git', 'GitHub', 'GitLab', 'Docker', 'Scrum'],
+  },
+  {
+    category: 'Design et modélisation',
+    items: ['UML', 'Figma', 'Adobe Photoshop', 'Adobe Illustrator'],
   },
 ];
