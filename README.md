@@ -20,7 +20,7 @@ Cette version est construite depuis `develop`. Elle conserve la palette frambois
 - Une sculpture organique originale donne son identité à l’accueil, avec une vidéo locale en boucle.
 - Navigation flottante, indication de section active et progression de lecture.
 - Portrait organique, parcours en cartes, compétences regroupées et galerie de projets filtrable Web/Mobile.
-- Illustrations conceptuelles des projets créées en HTML/CSS. Elles ne représentent pas des captures des applications. Une image réelle renseignée dans le dataset remplace automatiquement l’illustration.
+- Chaque projet affiche actuellement `/images/project_default.png`. Pour ajouter une capture, renseigner `image` et `imageAlt` dans le dataset. Format conseillé : 1920 × 1080 px (16:9), avec les éléments importants centrés car les cartes recadrent les images selon l’écran.
 - Apparitions uniques au défilement avec IntersectionObserver et Web Animations ; apparition du portrait par masque. Aucun contenu n’est masqué par défaut.
 - Survols légers, navigation clavier, détails natifs `<details>`, filtres avec état accessible et annonce du nombre de résultats.
 
@@ -31,7 +31,7 @@ Aucune bibliothèque ni police distante n’a été ajoutée au site. Le formula
 - `src/styles.css` : palette, mise en page responsive et interactions visuelles.
 - `src/app/directives/reveal.ts` : apparition progressive avec prise en compte de la réduction des mouvements.
 - `src/app/components/hero/` : contrôle de la vidéo et gestion de la visibilité.
-- `src/app/data/projects.data.ts` : contenu des projets, plateforme (`web` ou `mobile`) et illustration (`visual`).
+- `src/app/data/projects.data.ts` : contenu des projets, plateforme (`web` ou `mobile`).
 - `src/app/models/project.model.ts` : modèle des données.
 - `public/videos/` : film et affiche statique.
 - `scripts/matiere-scene.html` : source WebGL originale de la sculpture.

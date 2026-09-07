@@ -29,53 +29,16 @@
       }}
     </p>
     <div class="projects-grid">
-      @for (project of projects(); track project.title; let i = $index) {
-        <article class="project-card" [class.project-wide]="project.visual === 'home'" appReveal>
-          <div class="project-art" [attr.data-visual]="project.visual">
-            @if (project.image && project.image !== '/images/project_default.png') {
-              <img
-                [src]="project.image"
-                [alt]="project.imageAlt ?? ''"
-                width="960"
-                height="720"
-                loading="lazy"
-              />
-            } @else {
-              <div class="project-illustration" aria-hidden="true">
-                @switch (project.visual) {
-                  @case ('home') {
-                    <div class="home-sphere"></div>
-                    <div class="phone-sculpture">
-                      <div class="phone-notch"></div>
-                      <div class="phone-greeting">Un lieu à soi.</div>
-                      <div class="phone-picture"><span class="mini-house"></span></div>
-                      <div class="phone-text"><b></b><i></i></div>
-                      <div class="phone-bottom"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="home-chip"><span>⌂</span> Trouver son chez-soi.</div>
-                  }
-                  @case ('connect') {
-                    <div class="connection-orbit"></div>
-                    <div class="connection-cube">API<span>Spring Boot</span></div>
-                    <div class="connection-sphere">UI<span>Angular</span></div>
-                  }
-                  @case ('opportunity') {
-                    <div class="bar-sculpture"><i></i><i></i><i></i><i></i></div>
-                  }
-                  @case ('conversation') {
-                    <div class="bubble-sculpture"><i></i><i></i><i></i></div>
-                    <div class="bubble-small"><i></i><i></i><i></i></div>
-                  }
-                  @case ('stock') {
-                    <div class="stock-sculpture">
-                      <div><i></i><span></span><b>✓</b></div>
-                      <div><i></i><span></span><b>✓</b></div>
-                      <div><i></i><span></span><b>✓</b></div>
-                    </div>
-                  }
-                }
-              </div>
-            }
+      @for (project of projects(); track project.title) {
+        <article class="project-card" appReveal>
+          <div class="project-art">
+            <img
+              [src]="project.image || '/images/project_default.png'"
+              [alt]="project.imageAlt ?? ''"
+              width="1920"
+              height="1080"
+              loading="lazy"
+            />
             <span class="art-type">{{
               project.platform === 'mobile' ? 'Expérience mobile' : 'Application web'
             }}</span>
@@ -86,6 +49,12 @@
               @if (project.featured) {
                 <span class="featured-label">Projet phare</span>
               }
+              @if (project.indev) {
+                <span class="development-badge">
+                  <span class="development-dot" aria-hidden="true"></span>
+                  En développement
+                </span>
+              }
             </div>
             <h3>{{ project.title }}</h3>
             <p>{{ project.description }}</p>
@@ -95,7 +64,7 @@
               }
             </ul>
             <details class="project-details">
-              <summary>Ce que j’ai développé <span aria-hidden="true">+</span></summary>
+              <summary>Tâches effectuées <span aria-hidden="true">+</span></summary>
               <ul class="task-list">
                 @for (skill of project.skills; track skill) {
                   <li>{{ skill }}</li>
@@ -110,8 +79,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     data-project-link="github"
-                    class="text-link"
-                    >Code source <span aria-hidden="true">↗</span
+                    class="button button-primary"
+                    >Code source <span class="button-arrow" aria-hidden="true">↗</span
                     ><span class="sr-only"> de {{ project.title }} (nouvel onglet)</span></a
                   >
                 }
@@ -121,8 +90,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     data-project-link="demo"
-                    class="text-link"
-                    >Voir la démo <span aria-hidden="true">↗</span
+                    class="button button-primary"
+                    >Voir la démo <span class="button-arrow" aria-hidden="true">↗</span
                     ><span class="sr-only"> de {{ project.title }} (nouvel onglet)</span></a
                   >
                 }
@@ -132,6 +101,5 @@
         </article>
       }
     </div>
-    <p class="illustration-note">Les visuels sont des illustrations originales des projets.</p>
   </div>
 </section>

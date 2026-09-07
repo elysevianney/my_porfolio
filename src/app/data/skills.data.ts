@@ -29,4 +29,8 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
     category: 'Design et modélisation',
     items: ['UML', 'Figma', 'Adobe Photoshop', 'Adobe Illustrator'],
   },
+  {
+    category: 'Data Analysis',
+    items: ['Power BI', 'Tableau', 'Excel', 'Python (pandas, numpy, matplotlib)'],
+  },
 ];

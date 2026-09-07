@@ -16,10 +16,13 @@ describe('Projects', () => {
     );
 
     expect(element.querySelectorAll('article').length).toBe(PROJECTS.length);
-    expect(element.querySelectorAll('article img').length).toBe(
-      PROJECTS.filter((project) => project.image && project.image !== '/images/project_default.png')
-        .length,
-    );
+    const images = element.querySelectorAll<HTMLImageElement>('article img');
+    expect(images.length).toBe(PROJECTS.length);
+    images.forEach((image, index) => {
+      expect(image.getAttribute('src')).toBe(
+        PROJECTS[index].image || '/images/project_default.png',
+      );
+    });
     expect(element.querySelectorAll('[data-project-link]').length).toBe(expectedLinkCount);
     expect(element.textContent).toContain(PROJECTS[0].tools[0]);
     expect(element.textContent).toContain(PROJECTS[0].skills[0]);

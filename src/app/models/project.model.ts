@@ -1,6 +1,5 @@
 export interface Project {
   readonly platform: 'web' | 'mobile';
-  readonly visual: 'home' | 'connect' | 'opportunity' | 'conversation' | 'stock';
   readonly title: string;
   readonly description: string;
   readonly githubUrl?: string;
@@ -10,4 +9,6 @@ export interface Project {
   readonly image?: string;
   readonly imageAlt?: string;
   readonly featured?: boolean;
+  /** Affiche le badge « En développement » lorsque true. */
+  readonly indev?: boolean;
 }
