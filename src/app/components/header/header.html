@@ -14,7 +14,22 @@
               [class.nav-contact]="item.fragment === 'contact'"
               >{{ item.label }}
               @if (item.fragment === 'contact') {
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true"
+                  ><svg
+                    class="arrow-icon"
+                    aria-hidden="true"
+                    focusable="false"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 20 20 4M5 4h15v15" /></svg
+                ></span>
               }
             </a>
           </li>
@@ -56,8 +71,23 @@
               [attr.href]="'#' + item.fragment"
               [attr.aria-current]="activeSection() === item.fragment ? 'location' : null"
               (click)="closeMenu()"
-              >{{ item.label }}<span aria-hidden="true">↗</span></a
-            >
+              >{{ item.label
+              }}<span aria-hidden="true"
+                ><svg
+                  class="arrow-icon"
+                  aria-hidden="true"
+                  focusable="false"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M4 20 20 4M5 4h15v15" /></svg></span
+            ></a>
           </li>
         }
       </ul>
