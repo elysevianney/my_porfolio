@@ -1,0 +1,33 @@
+<section id="hobbies" aria-labelledby="hobbies-title" class="section-space hobbies-section">
+  <div class="shell">
+    <div class="hobbies-heading" appReveal>
+      <div>
+        <p class="eyebrow">Mes loisirs</p>
+        <h2 id="hobbies-title" class="section-title">En dehors<br /><span>du code.</span></h2>
+      </div>
+      <p>Des pages, du jeu, du mouvement.<br />Ce qui nourrit ma curiosité et mon équilibre.</p>
+    </div>
+    <ul class="hobbies-grid" aria-label="Mes loisirs">
+      @for (hobby of hobbies; track hobby.id; let i = $index) {
+        <li class="hobby-card" [appReveal]="(i % 3) * 60">
+          <div class="hobby-image">
+            <img
+              [src]="hobby.image"
+              [alt]="hobby.imageAlt"
+              width="960"
+              height="720"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="hobby-copy">
+            <div>
+              <h3>{{ hobby.title }}</h3>
+              <p>{{ hobby.description }}</p>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

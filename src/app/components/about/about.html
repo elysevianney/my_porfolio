@@ -1,44 +1,51 @@
-<section id="about" aria-labelledby="about-title" class="py-20 sm:py-24">
-  <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-black/5">
-    <div class="bg-cv-primary px-7 py-5 sm:px-10">
-      <p class="text-sm font-semibold tracking-widest text-cv-soft uppercase">Mon profil</p>
-      <h2 id="about-title" class="mt-1 text-3xl font-bold text-white sm:text-4xl">À propos</h2>
+<section id="about" aria-labelledby="about-title" class="section-space shell">
+  <div class="about-grid">
+    <div class="about-portrait" appReveal [revealMask]="true">
+      <div class="portrait-blob">
+        <img
+          src="/images/maphoto.jpg"
+          alt="Elysé Vianney Ahomagnon"
+          width="414"
+          height="533"
+          loading="lazy"
+        />
+      </div>
+      <span class="portrait-pebble" aria-hidden="true"></span>
+      <div class="portrait-label">
+        <span class="label-dot" aria-hidden="true"></span> Curieux de nature.
+      </div>
+      <span class="portrait-line" aria-hidden="true"></span>
     </div>
-
-    <div class="grid gap-10 p-7 sm:p-10 lg:grid-cols-[1.35fr_0.65fr] lg:p-12">
-      <div class="space-y-5 text-base leading-7 text-cv-muted sm:text-lg sm:leading-8">
-        <p>
-          Passionné par le développement logiciel, j’aime transformer des besoins concrets en applications fiables, accessibles et agréables à utiliser.
-        </p>
-        <p>
-          Curieux et rigoureux, je souhaite mettre mes compétences au service de projets innovants tout en continuant à progresser au sein d’une équipe expérimentée.
-        </p>
-
+    <div class="about-copy" [appReveal]="100">
+      <p class="eyebrow">L’humain derrière le code</p>
+      <h2 id="about-title" class="section-title">
+        De la curiosité.<br />Du sens.<br /><span>Et du savoir-faire.</span>
+      </h2>
+      <p class="lead-copy">
+        J’aime comprendre comment les choses fonctionnent. Et imaginer comment les rendre
+        meilleures.
+      </p>
+      <p>
+        Passionné par le développement logiciel, je transforme des besoins concrets en applications
+        fiables, accessibles et agréables à utiliser.
+      </p>
+      <p>
+        Curieux et rigoureux, je souhaite contribuer à des projets innovants et continuer à
+        progresser au sein d’une équipe expérimentée.
+      </p>
+      <div class="about-bottom">
+        <div class="study-note">
+          <div><strong>Master 2 MIAGE</strong><span>ISTIC · Université de Rennes</span></div>
+        </div>
         <a
           href="/documents/cv-vianney-ahomagnon-2.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-cv-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-cv-primary-dark"
+          class="button button-primary"
           aria-label="Ouvrir mon CV au format PDF dans un nouvel onglet"
+          >Mon CV <span class="button-arrow" aria-hidden="true">↗</span></a
         >
-          Voir mon CV
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5m0-5-9 9M19 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4" />
-          </svg>
-        </a>
       </div>
-
-      <dl class="grid content-start gap-4">
-        <div class="rounded-2xl bg-cv-soft p-5">
-          <dt class="text-sm font-semibold tracking-wide text-cv-primary uppercase">Formation actuelle</dt>
-          <dd class="mt-2 font-semibold text-cv-text">Master 1 MIAGE</dd>
-          <dd class="mt-1 text-sm leading-6 text-cv-muted">ISTIC — Université de Rennes</dd>
-        </div>
-        <div class="rounded-2xl border border-cv-primary/15 p-5">
-          <dt class="text-sm font-semibold tracking-wide text-cv-primary uppercase">Localisation</dt>
-          <dd class="mt-2 font-semibold text-cv-text">Rennes, France</dd>
-        </div>
-      </dl>
     </div>
   </div>
 </section>

@@ -1,0 +1,49 @@
+<!doctype html><html lang="fr"><meta charset="utf-8"><title>Sculpture Matière — générateur</title><style>html,body{margin:0}canvas{display:block}</style><canvas width="768" height="768"></canvas><script>
+// Original implicit sculpture. This renderer is used offline, never shipped to visitors.
+const canvas=document.querySelector('canvas');
+const gl=canvas.getContext('webgl',{preserveDrawingBuffer:true,antialias:false});
+if(!gl) throw new Error('WebGL unavailable');
+const vertex=`attribute vec2 position;void main(){gl_Position=vec4(position,0.,1.);}`;
+const fragment=`precision highp float;
+uniform float phase;
+uniform vec2 resolution;
+mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
+float sculpture(vec3 p){
+ p.xz=rot(.38+.16*sin(phase))*p.xz;
+ p.xy=rot(-.42+.08*cos(phase))*p.xy;
+ p.yz=rot(.22+.12*sin(phase))*p.yz;
+ float a=atan(p.y,p.x);
+ float ring=.98+.16*cos(3.*a+.12*sin(phase));
+ float radius=.39+.055*sin(2.*a+phase);
+ return length(vec2(length(p.xy)-ring,p.z+.12*sin(2.*a)))-radius;
+}
+vec3 normal(vec3 p){vec2 e=vec2(.001,0.);return normalize(vec3(sculpture(p+e.xyy)-sculpture(p-e.xyy),sculpture(p+e.yxy)-sculpture(p-e.yxy),sculpture(p+e.yyx)-sculpture(p-e.yyx)));}
+void main(){
+ vec2 uv=(gl_FragCoord.xy/resolution-.5)*2.;
+ vec3 bg=vec3(1.,.965,.976);
+ // A wide studio backdrop and a soft contact shadow, leaving clear negative space.
+ float shadow=exp(-pow(uv.x/.62,2.)-pow((uv.y+.71)/.1,2.));
+ vec3 color=bg-vec3(.14,.20,.18)*shadow;
+ vec3 ro=vec3(0.,.15,5.4),rd=normalize(vec3(uv*1.7,-4.));
+ float t=0.;bool hit=false;
+ for(int i=0;i<96;i++){vec3 p=ro+rd*t;float d=sculpture(p);if(d<.001){hit=true;break;}t+=d*.8;if(t>9.)break;}
+ if(hit){
+ vec3 p=ro+rd*t,n=normal(p),light=normalize(vec3(-3.,4.,5.));
+ float diff=max(dot(n,light),0.);
+ float rim=pow(1.-max(dot(n,-rd),0.),3.);
+ float spec=pow(max(dot(n,normalize(light-rd)),0.),48.);
+ float ao=clamp(sculpture(p+n*.18)/.18,.4,1.);
+ vec3 clay=vec3(.66,.085,.235);
+ float glaze=smoothstep(-.4,1.3,p.y*.65-p.x*.55);
+ clay=mix(clay,vec3(.88,.39,.51),glaze*.52);
+ color=clay*(.5+.6*diff)*ao+vec3(1.,.77,.8)*(spec*.3+rim*.14);
+ color+=vec3(.055,.015,.028)*max(-n.y,0.);
+ }
+ gl_FragColor=vec4(color,1.);
+}`;
+function compile(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+const program=gl.createProgram();gl.attachShader(program,compile(gl.VERTEX_SHADER,vertex));gl.attachShader(program,compile(gl.FRAGMENT_SHADER,fragment));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);const pos=gl.getAttribLocation(program,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);gl.uniform2f(gl.getUniformLocation(program,'resolution'),768,768);
+window.renderFrame=(phase)=>{gl.uniform1f(gl.getUniformLocation(program,'phase'),phase);gl.drawArrays(gl.TRIANGLES,0,6);gl.finish();return canvas.toDataURL('image/png').split(',')[1];};
+window.renderFrame(0);
+</script></html>

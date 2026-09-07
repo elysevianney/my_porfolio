@@ -1,102 +1,105 @@
-<section id="projects" aria-labelledby="projects-title" class="py-20 sm:py-24">
-  <div class="mb-10 max-w-3xl">
-    <p class="font-semibold tracking-wide text-cv-primary uppercase">Mes réalisations</p>
-    <h2 id="projects-title" class="mt-2 text-3xl font-bold tracking-tight text-cv-text sm:text-4xl">
-      Projets
-    </h2>
-    <p class="mt-4 text-base leading-7 text-cv-muted sm:text-lg">
-      Une sélection de projets qui illustrent mon parcours en développement web et mobile.
+<section id="projects" aria-labelledby="projects-title" class="section-space projects-section">
+  <div class="shell">
+    <div class="projects-heading" appReveal>
+      <div>
+        <p class="eyebrow">Une sélection de réalisations</p>
+        <h2 id="projects-title" class="section-title">
+          Les idées deviennent<br /><span>des expériences.</span>
+        </h2>
+      </div>
+      <p>
+        Du premier besoin à la dernière ligne de code.<br />Voici quelques projets qui jalonnent mon
+        parcours.
+      </p>
+    </div>
+    <div class="project-filter" role="group" aria-label="Filtrer les projets">
+      @for (option of filters; track option.value) {
+        <button
+          type="button"
+          [attr.aria-pressed]="filter() === option.value"
+          (click)="filter.set(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+    <p class="sr-only" role="status">
+      {{ projects().length }} projet{{ projects().length > 1 ? 's' : '' }} affiché{{
+        projects().length > 1 ? 's' : ''
+      }}
     </p>
-  </div>
-
-  <div class="grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3">
-    @for (project of projects; track project.title) {
-      <article
-        class="flex h-full flex-col overflow-hidden rounded-3xl border border-transparent bg-white shadow-sm ring-1 ring-black/5 transition-transform duration-300 hover:-translate-y-1"
-        [class.border-cv-primary]="project.featured"
-      >
-        <div class="relative aspect-video overflow-hidden bg-cv-soft">
-          @if (project.image) {
+    <div class="projects-grid">
+      @for (project of projects(); track project.title) {
+        <article class="project-card" appReveal>
+          <div class="project-art">
             <img
-              [src]="project.image"
+              [src]="project.image || '/images/project_default.png'"
               [alt]="project.imageAlt ?? ''"
               width="1920"
               height="1080"
               loading="lazy"
-              class="size-full object-cover transition-transform duration-300 hover:scale-[1.02]"
             />
-          } @else {
-            <div class="flex size-full items-center justify-center text-cv-primary" aria-hidden="true">
-              <svg viewBox="0 0 24 24" class="size-12" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14H4V5Zm0 10 4-4 3 3 2-2 7 7M15 8h.01" />
-              </svg>
+            <span class="art-type">{{
+              project.platform === 'mobile' ? 'Expérience mobile' : 'Application web'
+            }}</span>
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span>{{ project.platform === 'mobile' ? 'Mobile' : 'Web' }}</span>
+              @if (project.featured) {
+                <span class="featured-label">Projet phare</span>
+              }
+              @if (project.indev) {
+                <span class="development-badge">
+                  <span class="development-dot" aria-hidden="true"></span>
+                  En développement
+                </span>
+              }
             </div>
-          }
-
-          @if (project.featured) {
-            <span class="absolute top-4 left-4 rounded-full bg-cv-primary px-3 py-1.5 text-xs font-bold tracking-wide text-white uppercase">
-              Projet phare
-            </span>
-          }
-        </div>
-
-        <div class="flex flex-1 flex-col p-6 sm:p-7">
-          <h3 class="text-xl font-bold text-cv-text">{{ project.title }}</h3>
-          <p class="mt-3 flex-1 leading-7 text-cv-muted">{{ project.description }}</p>
-
-          <div class="mt-6">
-            <h4 class="text-sm font-bold tracking-wide text-cv-primary-dark uppercase">Outils utilisés</h4>
-            <ul class="mt-3 flex flex-wrap gap-2">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+            <ul class="tags" aria-label="Outils utilisés">
               @for (tool of project.tools; track tool) {
-                <li class="rounded-full bg-cv-soft px-3 py-1.5 text-sm font-semibold text-cv-primary-dark">
-                  {{ tool }}
-                </li>
+                <li>{{ tool }}</li>
               }
             </ul>
+            <details class="project-details">
+              <summary>Tâches effectuées <span aria-hidden="true">+</span></summary>
+              <ul class="task-list">
+                @for (skill of project.skills; track skill) {
+                  <li>{{ skill }}</li>
+                }
+              </ul>
+            </details>
+            @if (project.githubUrl || project.demoUrl) {
+              <div class="project-links">
+                @if (project.githubUrl) {
+                  <a
+                    [href]="project.githubUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-project-link="github"
+                    class="button button-primary"
+                    >Code source <span class="button-arrow" aria-hidden="true">↗</span
+                    ><span class="sr-only"> de {{ project.title }} (nouvel onglet)</span></a
+                  >
+                }
+                @if (project.demoUrl) {
+                  <a
+                    [href]="project.demoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-project-link="demo"
+                    class="button button-primary"
+                    >Voir la démo <span class="button-arrow" aria-hidden="true">↗</span
+                    ><span class="sr-only"> de {{ project.title }} (nouvel onglet)</span></a
+                  >
+                }
+              </div>
+            }
           </div>
-
-          <div class="mt-5">
-            <h4 class="text-sm font-bold tracking-wide text-cv-primary-dark uppercase">Compétences développées</h4>
-            <ul class="mt-3 grid gap-2 text-sm text-cv-muted">
-              @for (skill of project.skills; track skill) {
-                <li class="flex gap-2">
-                  <span class="mt-2 size-1.5 shrink-0 rounded-full bg-cv-primary" aria-hidden="true"></span>
-                  <span>{{ skill }}</span>
-                </li>
-              }
-            </ul>
-          </div>
-
-          @if (project.githubUrl || project.demoUrl) {
-            <div class="mt-6 flex flex-wrap gap-3 border-t border-cv-primary/10 pt-5">
-              @if (project.githubUrl) {
-                <a
-                  [href]="project.githubUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-project-link="github"
-                  class="inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-cv-primary px-4 py-2 text-sm font-semibold text-cv-primary transition-colors hover:bg-cv-soft hover:text-cv-primary-dark"
-                >
-                  Code source
-                  <span class="sr-only"> de {{ project.title }} (nouvel onglet)</span>
-                </a>
-              }
-              @if (project.demoUrl) {
-                <a
-                  [href]="project.demoUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-project-link="demo"
-                  class="inline-flex min-h-11 items-center justify-center rounded-xl bg-cv-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cv-primary-dark"
-                >
-                  Voir la démo
-                  <span class="sr-only"> de {{ project.title }} (nouvel onglet)</span>
-                </a>
-              }
-            </div>
-          }
-        </div>
-      </article>
-    }
+        </article>
+      }
+    </div>
   </div>
 </section>
