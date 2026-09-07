@@ -6,5 +6,6 @@ export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
   { label: 'Expériences', fragment: 'experience' },
   { label: 'Compétences', fragment: 'skills' },
   { label: 'Projets', fragment: 'projects' },
+  { label: 'Loisirs', fragment: 'hobbies' },
   { label: 'Contact', fragment: 'contact' },
 ];

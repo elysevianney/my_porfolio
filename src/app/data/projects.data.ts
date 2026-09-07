@@ -3,44 +3,67 @@ import { Project } from '../models/project.model';
 const DEFAULT_PROJECT_IMAGE = '/images/project_default.png';
 
 export const PROJECTS: readonly Project[] = [
+
   {
-    title: 'Application mobile de recherche d’appartements',
+    title: 'Campus Solidaire',
+    platform: 'web',
+    description:
+      'Application web de mise en relation entre étudiants et associations pour faciiter la vie étudiante',
+    tools: ['Spring Boot', 'Angular', 'API REST', 'Scrum'],
+    skills: ['Développement full stack', 'Conception d’API', 'Travail en équipe agile'],
+    image: '/images/projects/campus-solidaire.png',
+    demoUrl: 'https://campus-solidaire.fr',
+  },
+  {
+    title: 'CRUD Spring Boot',
+    platform: 'web',
+    description:
+      'API REST développée avec Spring Boot pour gérer les opérations CRUD sur une base de données.',
+    tools: ['Spring Boot', 'API REST'],
+    skills: ['Développement back-end', 'Conception d’API'],
+    image: '/images/projects/crud-spring-boot.png',
+    githubUrl: 'https://github.com/elysevianney/first_spring_project'
+  },
+  {
+    title: 'E-House',
+    platform: 'mobile',
     description:
       'Application mobile réalisée comme projet de fin d’études pour faciliter la recherche d’appartements à louer.',
     tools: ['Flutter', 'UML'],
     skills: ['Développement mobile', 'Analyse des besoins', 'Modélisation UML'],
-    image: DEFAULT_PROJECT_IMAGE,
-    featured: true,
+    image: '/images/projects/ehouse.png',
+    githubUrl: 'https://github.com/elysevianney/Rent-hous-app'
   },
+  
   {
-    title: 'Application web Spring Boot et Angular',
+    title: 'Jobyfy',
+    platform: 'web',
     description:
-      'Projet mené en équipe avec une organisation Scrum, une API REST Spring Boot et une interface Angular.',
-    tools: ['Spring Boot', 'Angular', 'API REST', 'Scrum'],
-    skills: ['Développement full stack', 'Conception d’API', 'Travail en équipe agile'],
-    image: DEFAULT_PROJECT_IMAGE,
-    featured: true,
+      "Application web de recherche d'emplois",
+    tools: ['Symfony', 'Scrum'],
+    skills: ['Développement full stack', 'Travail en équipe agile'],
+    image: '/images/projects/jobify.png',
+    githubUrl: 'https://github.com/elysevianney/projet-pw',
   },
   {
-    title: 'Suivi de bonnes affaires',
+    title: 'MultiModal AI',
+    platform: 'web',
     description:
-      'Application de suivi d’opportunités pour les secteurs de l’immobilier et de l’automobile.',
-    tools: ['Python', 'Laravel'],
-    skills: ['Développement web', 'Conception fonctionnelle', 'Développement back-end'],
-    image: DEFAULT_PROJECT_IMAGE,
+      'Application web de recherche d’images et de vidéos à partir de requêtes textuelles, utilisant des modèles d’intelligence artificielle multimodaux.',
+    tools: ['React', 'FastAPI', 'Gemini API', 'Scrum'],
+    skills: ['IA','Développement full stack', 'Conception d’API', 'Travail en équipe agile', 'UI/UX design'],
+    image: '/images/projects/multimodal-ai.png',
+    indev: true,
   },
+  
   {
-    title: 'Application web de visioconférence',
-    description: 'Application permettant des échanges vidéo depuis une interface web.',
-    tools: ['React'],
-    skills: ['Développement front-end', 'Conception d’interfaces web'],
-    image: DEFAULT_PROJECT_IMAGE,
-  },
-  {
-    title: 'Plateforme de gestion de stock',
-    description: 'Plateforme web conçue pour gérer et suivre les mouvements de stock.',
-    tools: ['Laravel'],
-    skills: ['Développement back-end', 'Modélisation de données', 'Conception d’application web'],
-    image: DEFAULT_PROJECT_IMAGE,
+    title: 'ProxiShop',
+    platform: 'mobile',
+    description:
+      'Application mobile de recherche de produits et de magasins à proximité, permettant aux utilisateurs de trouver rapidement ce dont ils ont besoin.',
+    tools: ['Flutter', 'UML'],
+    skills: ['Développement mobile', 'Analyse des besoins', 'Modélisation UML'],
+    image: '/images/projects/proxy-shop.png',
+    indev: true,
   },
 ];
