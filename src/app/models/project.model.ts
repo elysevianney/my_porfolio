@@ -1,4 +1,6 @@
 export interface Project {
+  readonly platform: 'web' | 'mobile';
+  readonly visual: 'home' | 'connect' | 'opportunity' | 'conversation' | 'stock';
   readonly title: string;
   readonly description: string;
   readonly githubUrl?: string;

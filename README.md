@@ -1,59 +1,62 @@
-# MyPortfolio
+# Portfolio — Elysé Vianney Ahomagnon
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.23.
+Portfolio Angular 21 et Tailwind CSS 4, pré-rendu statiquement pour Vercel.
 
-## Development server
+## Développement et validation
 
-To start a local development server, run:
-
-```bash
-ng serve
+```sh
+npm install
+npm start
+npm test -- --watch=false
+npm run build
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Le serveur de développement est accessible sur `http://localhost:4200`. Les fichiers de production sont générés dans `dist/my_portfolio/browser`.
 
-## Code scaffolding
+## Direction Matière — branche `redesign2`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Cette version est construite depuis `develop`. Elle conserve la palette framboise, rose poudré, anthracite et blanc du portfolio de base.
 
-```bash
-ng generate component component-name
+- Une sculpture organique originale donne son identité à l’accueil, avec une vidéo locale en boucle.
+- Navigation flottante, indication de section active et progression de lecture.
+- Portrait organique, parcours en cartes, compétences regroupées et galerie de projets filtrable Web/Mobile.
+- Illustrations conceptuelles des projets créées en HTML/CSS. Elles ne représentent pas des captures des applications. Une image réelle renseignée dans le dataset remplace automatiquement l’illustration.
+- Apparitions uniques au défilement avec IntersectionObserver et Web Animations ; apparition du portrait par masque. Aucun contenu n’est masqué par défaut.
+- Survols légers, navigation clavier, détails natifs `<details>`, filtres avec état accessible et annonce du nombre de résultats.
+
+Aucune bibliothèque ni police distante n’a été ajoutée au site. Le formulaire et son intégration Formspree sont conservés.
+
+## Fichiers utiles
+
+- `src/styles.css` : palette, mise en page responsive et interactions visuelles.
+- `src/app/directives/reveal.ts` : apparition progressive avec prise en compte de la réduction des mouvements.
+- `src/app/components/hero/` : contrôle de la vidéo et gestion de la visibilité.
+- `src/app/data/projects.data.ts` : contenu des projets, plateforme (`web` ou `mobile`) et illustration (`visual`).
+- `src/app/models/project.model.ts` : modèle des données.
+- `public/videos/` : film et affiche statique.
+- `scripts/matiere-scene.html` : source WebGL originale de la sculpture.
+- `scripts/generate-matiere.cjs` : génération hors ligne du film avec Playwright et FFmpeg.
+
+## Vidéo
+
+La boucle H.264 de 12 secondes, 768 × 768 à 20 images/s, pèse environ 175 Ko. Son affiche JPEG pèse environ 24 Ko. Aucun moteur 3D n’est chargé chez le visiteur.
+
+La vidéo est muette, contrôlable et mise en pause lorsqu’elle sort de l’écran ou lorsque l’onglet est masqué. Elle ne se charge pas automatiquement si la réduction des mouvements ou l’économie de données est activée. L’affiche reste disponible et une lecture volontaire demeure possible.
+
+Pour régénérer les ressources, disposer de FFmpeg et de Playwright avec un navigateur Chromium, puis lancer :
+
+```sh
+node scripts/generate-matiere.cjs
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Si ces outils sont installés séparément, `PLAYWRIGHT_MODULE` accepte le chemin du module Playwright et `CHROMIUM_PATH` le chemin de l’exécutable du navigateur. Ils servent uniquement à la génération ; ils ne sont pas nécessaires au build ni au déploiement.
 
-```bash
-ng generate --help
-```
+## Vérifications réalisées
 
-## Building
+- 20 tests unitaires réussis et build de production réussi.
+- Brave/Chromium : affichage de 320 à 1440 px, sans débordement horizontal.
+- Audit axe WCAG 2 A/AA et 2.1 AA : aucune violation automatisée sur ordinateur et mobile.
+- Filtres, détails des projets, navigation active, menu mobile, Échap et retour du focus vérifiés.
+- Pause/reprise du film, arrêt hors écran, préférence de mouvement modifiée en direct, économie de données et contenu pré-rendu sans JavaScript vérifiés.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+L’audit automatisé ne remplace pas une évaluation complète avec les technologies d’assistance.

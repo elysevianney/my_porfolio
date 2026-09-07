@@ -6,9 +6,11 @@ import { ContactService } from '../../services/contact.service';
 
 type SubmissionStatus = 'idle' | 'sending' | 'success' | 'error';
 
+import { Reveal } from '../../directives/reveal';
+
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Reveal],
   templateUrl: './contact.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
