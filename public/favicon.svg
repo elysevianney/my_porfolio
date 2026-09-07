@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#aa1a45" />
-  <path d="M12 14h11l9 31 9-31h11L38 52H26L12 14Z" fill="#fff" />
+  <path
+    fill="#aa1a45"
+    fill-rule="evenodd"
+    transform="rotate(-25 32 32)"
+    d="M29 5C45 5 57 17 57 35C57 49 49 59 35 59H26C14 59 7 50 7 38V30C7 15 16 5 29 5Z
+       M32 21C38 21 43 25 43 33C43 40 39 43 34 43H29C25 43 23 40 23 36V31C23 25 27 21 32 21Z"
+  />
 </svg>

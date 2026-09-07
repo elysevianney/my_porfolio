@@ -11,6 +11,6 @@ import { Reveal } from '../../directives/reveal';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Skills {
-  protected readonly symbols = ['{ }', '</>', '[ ]', '▤', '✓', '⌘', '✎', '▤'];
+  protected readonly symbols = ['{ }', '</>', '[ ]', '▤', '✓', '⌘', '✎', '▤', '✓'];
   protected readonly skillCategories = SKILL_CATEGORIES;
 }

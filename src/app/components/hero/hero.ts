@@ -16,38 +16,39 @@ import {
 export class Hero {
   private readonly video = viewChild<ElementRef<HTMLVideoElement>>('backgroundVideo');
   private readonly destroyRef = inject(DestroyRef);
-  private playbackAllowed = false;
   private inView = false;
 
   constructor() {
     afterNextRender(() => {
-      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const connection = (navigator as Navigator & { connection?: { saveData?: boolean } })
-        .connection;
-      this.playbackAllowed = !motion.matches && !connection?.saveData;
-      const updatePreference = () => {
-        this.playbackAllowed = !motion.matches && !connection?.saveData;
-        this.updatePlayback();
-      };
+      const video = this.video()?.nativeElement;
+      if (!video) return;
+      video.muted = true;
+      const bounds = video.getBoundingClientRect();
+      this.inView = bounds.bottom > 0 && bounds.top < window.innerHeight;
       const visibility = () => this.updatePlayback();
       const observer =
         'IntersectionObserver' in window
           ? new IntersectionObserver(([entry]) => {
-              this.inView = entry.isIntersecting;
+              this.inView = entry?.isIntersecting ?? false;
               this.updatePlayback();
             })
           : undefined;
       if (observer) {
-        observer.observe(this.video()!.nativeElement);
-      } else {
-        this.inView = true;
+        observer.observe(video);
       }
-      motion.addEventListener('change', updatePreference);
+      // Retry when the media is ready or a gesture unlocks browser autoplay.
+      video.addEventListener('canplay', visibility);
+      document.addEventListener('pointerdown', visibility, { passive: true });
+      document.addEventListener('keydown', visibility);
+      window.addEventListener('pageshow', visibility);
       document.addEventListener('visibilitychange', visibility);
       this.updatePlayback();
       this.destroyRef.onDestroy(() => {
         observer?.disconnect();
-        motion.removeEventListener('change', updatePreference);
+        video.removeEventListener('canplay', visibility);
+        document.removeEventListener('pointerdown', visibility);
+        document.removeEventListener('keydown', visibility);
+        window.removeEventListener('pageshow', visibility);
         document.removeEventListener('visibilitychange', visibility);
       });
     });
@@ -56,12 +57,13 @@ export class Hero {
   private updatePlayback(): void {
     const video = this.video()?.nativeElement;
     if (!video) return;
-    if (this.playbackAllowed && this.inView && !document.hidden) {
-      if (!video.getAttribute('src')) video.src = '/videos/matiere-loop.mp4';
+    if (this.inView && !document.hidden) {
       video.muted = true;
-      void video.play()?.catch(() => {
-        // Keep the poster if the browser blocks automatic playback.
-      });
+      if (video.paused) {
+        void video.play()?.catch(() => {
+          // A later canplay, visibility change or user gesture retries playback.
+        });
+      }
     } else if (!video.paused) {
       video.pause();
     }

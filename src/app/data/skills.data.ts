@@ -33,4 +33,8 @@ export const SKILL_CATEGORIES: readonly SkillCategory[] = [
     category: 'Data Analysis',
     items: ['Power BI', 'Tableau', 'Excel', 'Python (pandas, numpy, matplotlib)'],
   },
+  {
+    category: 'Gestion de projet',
+    items: ['Méthodes agiles', 'Trello' , 'Jira', 'Planification', 'Communication'],
+  },
 ];
