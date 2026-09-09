@@ -24,6 +24,9 @@ describe('Projects', () => {
       );
     });
     expect(element.querySelectorAll('[data-project-link]').length).toBe(expectedLinkCount);
+    expect(element.querySelectorAll('[data-github-icon]').length).toBe(
+      PROJECTS.filter((project) => project.githubUrl).length,
+    );
     expect(element.textContent).toContain(PROJECTS[0].tools[0]);
     expect(element.textContent).toContain(PROJECTS[0].skills[0]);
   });
